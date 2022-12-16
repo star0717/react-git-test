@@ -1,11 +1,13 @@
 import logo from "./logo.svg";
 import "./App.css";
 import StopWatch from "./StopWatch";
+import NumberCounter from "./NumberCounter";
 
 function App() {
   return (
     <>
-      <StopWatch />
+      {/* <StopWatch /> */}
+      <NumberCounter />
     </>
   );
 }
