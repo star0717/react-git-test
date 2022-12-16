@@ -17,15 +17,12 @@ function NumberCounter() {
       </>
     );
 
-  const noIs8MultipleDiv =
-    no % 8 == 0 ? (
-      <>
-        <hr />
-        <span>8의 배수입니다</span>
-      </>
-    ) : (
-      <></>
-    );
+  const noIs8MultipleDiv = no % 8 == 0 && (
+    <>
+      <hr />
+      <span>8의 배수입니다</span>
+    </>
+  );
   return (
     <>
       숫자 : {no}
