@@ -3,6 +3,7 @@ import React, { useState } from "react";
 function StopWatch() {
   const [num, setNum] = useState(0);
   setTimeout(() => setNum(num + 1), 1000);
+  // push test
 
   return <>숫자 : {num}</>;
 }
