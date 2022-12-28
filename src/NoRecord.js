@@ -10,7 +10,8 @@ function NoRecord() {
   //     setArr([...arr, arr.length + 1]);
   //   }, 1000);
 
-  const saveNo = () => {
+  const saveNo = (e) => {
+    e.preventDefault();
     if (no === "") {
       alert("숫자를 입력해주세요");
       return;
@@ -24,13 +25,15 @@ function NoRecord() {
     <>
       {/* {arr.join(",")} */}
       <h1>number record</h1>
-      <input
-        onChange={(e) => setNo(e.target.valueAsNumber)}
-        type="number"
-        value={no}
-        className="input w-full max-w-xs"
-      />
-      <button type="button" onClick={saveNo} className="btn btn-outline">
+      <form>
+        <input
+          onChange={(e) => setNo(e.target.valueAsNumber)}
+          type="number"
+          value={no}
+          className="input w-full max-w-xs"
+        />
+      </form>
+      <button type="submit" onClick={saveNo} className="btn btn-outline">
         RECORD
       </button>
       <hr />
@@ -39,6 +42,7 @@ function NoRecord() {
       <hr />
       <h1>v2</h1>
       Number:<ul>{li}</ul>
+      {/* test */}
     </>
   );
 }
