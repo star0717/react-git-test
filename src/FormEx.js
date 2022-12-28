@@ -32,7 +32,6 @@ function FormEx() {
     form.name.focus();
   };
 
-  // git token error test
   return (
     <>
       <form onSubmit={onSubmit}>
