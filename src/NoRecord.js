@@ -12,6 +12,7 @@ function NoRecord() {
 
   const saveNo = (e) => {
     e.preventDefault();
+    //prevent = 막는다 defailt = 기본 => 즉 이동을 막는다 ex)스크롤, 폼 전송,발송 등
     if (no === "") {
       alert("숫자를 입력해주세요");
       return;
@@ -32,10 +33,10 @@ function NoRecord() {
           value={no}
           className="input w-full max-w-xs"
         />
+        <button type="submit" onClick={saveNo} className="btn btn-outline">
+          RECORD
+        </button>
       </form>
-      <button type="submit" onClick={saveNo} className="btn btn-outline">
-        RECORD
-      </button>
       <hr />
       <h1>v1</h1>
       Number:{recordNos.join(",")}
