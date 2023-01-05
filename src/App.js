@@ -63,6 +63,7 @@ function App() {
       {/* <Sub setAges={setAges} ages={ages} />
       <div>나이들 : {ages.join(",")} </div> */}
       {/* <FormEx /> */}
+      {/* <RefEx /> */}
       <RefModifyEx />
     </>
   );

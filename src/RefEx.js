@@ -48,15 +48,14 @@ function RefEx() {
       <h1>기록된 숫자</h1>
       <ul>
         {recordedNos.map((el, index) => (
-          <li key={index}>{el}</li>
+          <li key={index}>
+            <span style={{ width: 70, display: "inline-block" }}>{el}</span>
+            <span style={{ width: 70, display: "inline-block" }}>{index}</span>
+            <button onClick={() => removeNo(index)}>DELETE</button>
+          </li>
         ))}
       </ul>
       <hr />
-      <button onClick={() => removeNo(0)}>index 0 삭제</button>
-      <button onClick={() => removeNo(2)}>index 2 삭제</button>
-      <button onClick={() => removeNo(4)}>index 4 삭제</button>
-      <button onClick={() => removeNo(6)}>index 6 삭제</button>
-      <button onClick={() => removeNo(8)}>index 8 삭제</button>
     </>
   );
 }
