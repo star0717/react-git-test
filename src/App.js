@@ -8,6 +8,7 @@ import NoRecord from "./NoRecord";
 import FormEx from "./FormEx";
 import RefEx from "./RefEx";
 import RefModifyEx from "./RefModifyEx";
+import Notice from "./Notice";
 import { useState } from "react";
 
 // function Box(props) {
@@ -64,7 +65,8 @@ function App() {
       <div>나이들 : {ages.join(",")} </div> */}
       {/* <FormEx /> */}
       {/* <RefEx /> */}
-      <RefModifyEx />
+      {/* <RefModifyEx /> */}
+      <Notice />
     </>
   );
 }
