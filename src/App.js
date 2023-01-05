@@ -6,6 +6,7 @@ import Popup from "./Popup";
 import ProdList from "./ProdList";
 import NoRecord from "./NoRecord";
 import FormEx from "./FormEx";
+import RefEx from "./RefEx";
 import { useState } from "react";
 
 // function Box(props) {
@@ -60,7 +61,8 @@ function App() {
 
       {/* <Sub setAges={setAges} ages={ages} />
       <div>나이들 : {ages.join(",")} </div> */}
-      <FormEx />
+      {/* <FormEx /> */}
+      <RefEx />
     </>
   );
 }
