@@ -9,37 +9,88 @@ import FormEx from "./FormEx";
 import RefEx from "./RefEx";
 import RefModifyEx from "./RefModifyEx";
 import Notice from "./Notice";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
+
+function isPrimeNumber(no) {
+  for (let i = 2; i < no; i++) {
+    if (i * i > no) {
+      break;
+    }
+
+    if (no % i == 0) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function getPrimeNumbers(max) {
+  const primeNumbers = [];
+
+  for (let i = 2; i <= max; i++) {
+    if (isPrimeNumber(i)) {
+      primeNumbers.push(i);
+    }
+  }
+
+  return primeNumbers;
+}
+
+function getPrimeNumbersCount(max) {
+  return getPrimeNumbers(max).length;
+}
+
+let AppCallCount = 0;
 
 function App() {
-  const [isDark, setIsDark] = useState(false);
+  AppCallCount++;
+  console.log(`AppCallCount : ${AppCallCount}`);
 
-  useEffect(() => {
-    const html = document.getElementsByTagName("html")[0];
+  const [inputedNo, setInputedNo] = useState(0);
+  const [no, setNo] = useState(0);
 
-    if (isDark) {
-      html.classList.add("dark");
-    } else {
-      html.classList.remove("dark");
+  const primeNumbersCount = useMemo(
+    () => getPrimeNumbersCount(inputedNo),
+    [inputedNo]
+  );
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+
+    form.number.value = form.number.value.trim();
+
+    if (form.number.value.length == 0) {
+      alert("숫자를 입력해주세요");
+      form.number.focus();
+
+      return;
     }
-  }, [isDark]);
+
+    const number = form.number.valueAsNumber;
+    form.number.focus();
+
+    setInputedNo(number);
+  };
 
   return (
     <>
-      <div>
-        <button className="btn-toggle-theme" onClick={() => setIsDark(!isDark)}>
-          테마토글
-        </button>
-      </div>
-
-      <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-        tempore similique quaerat, rerum sunt alias repellat aliquid! Nesciunt
-        fugit maiores quia obcaecati sed! A veniam eos earum porro eaque
-        commodi?
-      </div>
-
-      <h1 className="color-primary">하하 호호</h1>
+      <button onClick={() => setNo(no + 1)}>번호 : {no}</button>
+      <hr />
+      <form onSubmit={onSubmit}>
+        <input
+          type="number"
+          name="number"
+          placeholder="숫자를 입력해주세요."
+          defaultValue="0"
+        />
+        <input type="submit" value="확인" />
+        <hr />
+        <div>MAX : {inputedNo}</div>
+        <div>소수의 개수 : {primeNumbersCount}</div>
+      </form>
     </>
   );
 }
