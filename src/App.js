@@ -17,49 +17,34 @@ import React, {
   useCallback,
 } from "react";
 
-let SubCallCount = 0;
-
-function Sub({ no1, no2, calculateFunc }) {
-  SubCallCount++;
-  console.log(`SubCallCount : ${SubCallCount}`);
-
-  return (
-    <>
-      <div style={{ border: "10px solid red", padding: "10px" }}>
-        <div>
-          입력 : {no1},{no2}
-          <br />
-          결과 : {calculateFunc(no1, no2)}
-        </div>
-      </div>
-    </>
-  );
-}
-
-//testtest
-
-let AppCallCount = 0;
-
-const MemorisedSub = React.memo(Sub);
 
 function App() {
-  AppCallCount++;
-  console.log(`AppCallCount : ${AppCallCount}`);
+  const fruits = ["apple","pair","banana"];
+  const [selecteds, setSelecteds] = useState(new Array(fruits.length).fill(true));
 
-  const [no1, setNo1] = useState(0);
-  const [no2, setNo2] = useState(0);
+  const toggleFruitsSelected = (index) => {
+    const newSelecteds = selecteds.map((el, _index) => _index === index ? !el : el) 
+  }
 
-  const calculateFunc = useCallback((a, b) => a + b + no1, [no1]);
-
+  const setSelectedFruits = selecteds.map((el, index) => el ? fruits[index] : el)
   return (
     <>
-      <button className="button1" onClick={() => setNo1(no1 + 1)}>
-        BTN 1 : {no1}
-      </button>
-      <button className="button1" onClick={() => setNo2(no2 + 1)}>
-        BTN 2 : {no2}
-      </button>
-      <MemorisedSub no1={10} no2={20} calculateFunc={calculateFunc} />
+     <ul>
+      {fruits.map((fruits, index) => (
+        <li key={index}>
+          <label>
+            <input checked={selecteds[index]} type={`checkbox`} onChange={() => toggleFruitsSelected} />{fruits}
+          </label>
+        </li>
+      ))}
+      
+     </ul>
+     <hr />
+     <div>
+    선택상태 : {selecteds.join(",")}
+    <hr />
+    선택된 과일 : {selecteds.join(",")}
+     </div>
     </>
   );
 }
