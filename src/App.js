@@ -16,35 +16,14 @@ import React, {
   useMemo,
   useCallback,
 } from "react";
+import Toggle from "./Toggle";
+import Order from "./Order";
 
 
 function App() {
-  const fruits = ["apple","pair","banana"];
-  const [selecteds, setSelecteds] = useState(new Array(fruits.length).fill(true));
-
-  const toggleFruitsSelected = (index) => {
-    const newSelecteds = selecteds.map((el, _index) => _index === index ? !el : el) 
-  }
-
-  const setSelectedFruits = selecteds.map((el, index) => el ? fruits[index] : el)
   return (
     <>
-     <ul>
-      {fruits.map((fruits, index) => (
-        <li key={index}>
-          <label>
-            <input checked={selecteds[index]} type={`checkbox`} onChange={() => toggleFruitsSelected} />{fruits}
-          </label>
-        </li>
-      ))}
-      
-     </ul>
-     <hr />
-     <div>
-    선택상태 : {selecteds.join(",")}
-    <hr />
-    선택된 과일 : {selecteds.join(",")}
-     </div>
+    TODO
     </>
   );
 }
