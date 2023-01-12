@@ -9,69 +9,55 @@ import FormEx from "./FormEx";
 import RefEx from "./RefEx";
 import RefModifyEx from "./RefModifyEx";
 import Notice from "./Notice";
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useMemo,
+  useCallback,
+} from "react";
 
-function isPrimeNumber(no) {
-  for (let i = 2; i < no; i++) {
-    if (i * i > no) {
-      break;
-    }
+let SubCallCount = 0;
 
-    if (no % i === 0) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-function getPrimeNumbers(max) {
-  const primeNumbers = [];
-
-  for (let i = 2; i <= max; i++) {
-    if (isPrimeNumber(i)) {
-      primeNumbers.push(i);
-    }
-  }
-
-  return primeNumbers;
-}
-
-function getPrimeNumbersCount(max) {
-  return getPrimeNumbers(max).length;
-}
-
-function PrimeNosCount({ max }) {
-  const count = useMemo(() => getPrimeNumbersCount(max));
+function Sub({ no1, no2, calculateFunc }) {
+  SubCallCount++;
+  console.log(`SubCallCount : ${SubCallCount}`);
 
   return (
-    <div style={{ border: "10px solid black", padding: "20px" }}>
-      1 ~ {max} 사이에 존재하는 소수의 갯수 : {count}
-    </div>
+    <>
+      <div style={{ border: "10px solid red", padding: "10px" }}>
+        <div>
+          입력 : {no1},{no2}
+          <br />
+          결과 : {calculateFunc(no1, no2)}
+        </div>
+      </div>
+    </>
   );
 }
 
 let AppCallCount = 0;
 
+const MemorisedSub = React.memo(Sub);
+
 function App() {
   AppCallCount++;
   console.log(`AppCallCount : ${AppCallCount}`);
 
-  const [no, setNo] = useState(0);
+  const [no1, setNo1] = useState(0);
+  const [no2, setNo2] = useState(0);
+
+  const calculateFunc = useCallback((a, b) => a + b + no1, [no1]);
 
   return (
     <>
-      <PrimeNosCount max={100} />
-      <hr />
-      <PrimeNosCount max={200} />
-      <hr />
-      <PrimeNosCount max={300} />
-      <hr />
-      <PrimeNosCount max={100000} />
-      <hr />
-      <button className="button1" onClick={() => setNo(no + 1)}>
-        BTN : {no}
+      <button className="button1" onClick={() => setNo1(no1 + 1)}>
+        BTN 1 : {no1}
       </button>
+      <button className="button1" onClick={() => setNo2(no2 + 1)}>
+        BTN 2 : {no2}
+      </button>
+      <MemorisedSub no1={10} no2={20} calculateFunc={calculateFunc} />
     </>
   );
 }
