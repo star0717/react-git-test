@@ -36,6 +36,8 @@ function Sub({ no1, no2, calculateFunc }) {
   );
 }
 
+//testtest
+
 let AppCallCount = 0;
 
 const MemorisedSub = React.memo(Sub);
