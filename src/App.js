@@ -11,74 +11,35 @@ import RefModifyEx from "./RefModifyEx";
 import Notice from "./Notice";
 import React, { useEffect, useRef, useState } from "react";
 
-let AppCallCount = 0;
-let SubCallCount = 0;
-
-function Sub({ appNo }) {
-  SubCallCount++;
-  console.log(`Sub = ${SubCallCount}`);
-  const [no, setNo] = useState(0);
-  const [no2, setNo2] = useState(0);
-
-  useEffect(() => {
-    console.log(`effect1 : 단 한 번 실행`);
-  }, []);
-
-  useEffect(() => {
-    console.log(`effect2 : 부모(aPP)의 appNo가 바뀔 때 마다 실행`);
-  }, [appNo]);
-
-  useEffect(() => {
-    console.log(`effect3 : 나(sub)의 no가 바뀔 때 마다 실행`);
-  }, [no]);
-
-  useEffect(() => {
-    console.log(`effect4 : appNo or no가 바뀔 때 마다 실행`);
-  }, [appNo, no]);
-
-  useEffect(() => {
-    console.log(`effect5 : 매번 실행`);
-  });
-
-  return (
-    <>
-      <div style={{ color: "#000" }}>App no : {appNo} </div>
-      <button onClick={() => setNo(no + 1)}>BTN : {no}</button>
-      <button onClick={() => setNo2(no2 + 1)}>BTN2 : {no2}</button>
-    </>
-  );
-}
 function App() {
-  AppCallCount++;
-  console.log(`App = ${AppCallCount}`);
-  const [no, setNo] = useState(0);
+  const [isDark, setIsDark] = useState(false);
 
-  // const inputAgeRef = useRef(null);
-  // const useNameRef = useRef(null);
-  // useEffect(() => {
-  //   AppCallCount++;
-  //   console.log(`App이 ${AppCallCount} 번 실행됨`);
-  // }, []);
-  // [] => 의존성 배열 / 넣지 않으면 무한 리랜더링 됨
+  useEffect(() => {
+    const html = document.getElementsByTagName("html")[0];
 
-  // const [no, setNo] = useState(0);
+    if (isDark) {
+      html.classList.add("dark");
+    } else {
+      html.classList.remove("dark");
+    }
+  }, [isDark]);
+
   return (
     <>
-      {/* <input ref={useNameRef} type="text" placeholder="name" />
-      <input ref={inputAgeRef} type="number" placeholder="age" />
-      <button
-        onClick={() => {
-          setNo(no + 1);
-          inputAgeRef.current.focus();
-        }}
-      >
-        증가 : {no}
-      </button> */}
+      <div>
+        <button className="btn-toggle-theme" onClick={() => setIsDark(!isDark)}>
+          테마토글
+        </button>
+      </div>
 
-      <button onClick={() => setNo(no + 1)}>BTN : {no}</button>
+      <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
+        tempore similique quaerat, rerum sunt alias repellat aliquid! Nesciunt
+        fugit maiores quia obcaecati sed! A veniam eos earum porro eaque
+        commodi?
+      </div>
 
-      <hr />
-      <Sub appNo={no} />
+      <h1 className="color-primary">하하 호호</h1>
     </>
   );
 }
