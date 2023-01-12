@@ -47,3 +47,8 @@ body {
 }
 
 /* 테마 끝 */
+
+.button1 {
+  height: 40px;
+  width: 80px;
+}

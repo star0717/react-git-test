@@ -17,7 +17,7 @@ function isPrimeNumber(no) {
       break;
     }
 
-    if (no % i == 0) {
+    if (no % i === 0) {
       return false;
     }
   }
@@ -41,56 +41,37 @@ function getPrimeNumbersCount(max) {
   return getPrimeNumbers(max).length;
 }
 
+function PrimeNosCount({ max }) {
+  const count = useMemo(() => getPrimeNumbersCount(max));
+
+  return (
+    <div style={{ border: "10px solid black", padding: "20px" }}>
+      1 ~ {max} 사이에 존재하는 소수의 갯수 : {count}
+    </div>
+  );
+}
+
 let AppCallCount = 0;
 
 function App() {
   AppCallCount++;
   console.log(`AppCallCount : ${AppCallCount}`);
 
-  const [inputedNo, setInputedNo] = useState(0);
   const [no, setNo] = useState(0);
-
-  const primeNumbersCount = useMemo(
-    () => getPrimeNumbersCount(inputedNo),
-    [inputedNo]
-  );
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    const form = e.target;
-
-    form.number.value = form.number.value.trim();
-
-    if (form.number.value.length == 0) {
-      alert("숫자를 입력해주세요");
-      form.number.focus();
-
-      return;
-    }
-
-    const number = form.number.valueAsNumber;
-    form.number.focus();
-
-    setInputedNo(number);
-  };
 
   return (
     <>
-      <button onClick={() => setNo(no + 1)}>번호 : {no}</button>
+      <PrimeNosCount max={100} />
       <hr />
-      <form onSubmit={onSubmit}>
-        <input
-          type="number"
-          name="number"
-          placeholder="숫자를 입력해주세요."
-          defaultValue="0"
-        />
-        <input type="submit" value="확인" />
-        <hr />
-        <div>MAX : {inputedNo}</div>
-        <div>소수의 개수 : {primeNumbersCount}</div>
-      </form>
+      <PrimeNosCount max={200} />
+      <hr />
+      <PrimeNosCount max={300} />
+      <hr />
+      <PrimeNosCount max={100000} />
+      <hr />
+      <button className="button1" onClick={() => setNo(no + 1)}>
+        BTN : {no}
+      </button>
     </>
   );
 }
