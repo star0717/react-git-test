@@ -9,64 +9,32 @@ import FormEx from "./FormEx";
 import RefEx from "./RefEx";
 import RefModifyEx from "./RefModifyEx";
 import Notice from "./Notice";
-import { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-// function Box(props) {
-//   const className = props.className;
-//   return (
-//     <div
-//       style={{ width: 100, height: 100, backgroundColor: "red" }}
-//       className={className}
-//     ></div>
-//   );
-// }
-
-// function Sub({ setAges, ages }) {
-//   const onClick = () => {
-//     setAges((ages) => [...ages, 10, 20, 30]);
-//     setAges((ages) => [...ages, 40, 50, 60]);
-//     setAges((ages) => [...ages]);
-//   };
-//   return (
-//     <>
-//       <div style={{ border: "10px solid red" }}>
-//         <button onClick={onClick}>현재나이 : {ages}</button>
-//       </div>
-//     </>
-//   );
-// }
+let AppCallCount = 0;
 
 function App() {
-  // const fun1 = () => {
-  //   console.log("fun1");
-  // };
-  // const fun2 = (a, b) => {
-  //   console.log(`fun2 : ${a},${b}`);
-  // };
-  // const [ages, setAges] = useState([]);
+  const inputAgeRef = useRef(null);
+  const useNameRef = useRef(null);
+  useEffect(() => {
+    AppCallCount++;
+    console.log(`App이 ${AppCallCount} 번 실행됨`);
+  }, []);
+  // [] => 의존성 배열 / 넣지 않으면 무한 리랜더링 됨
 
+  const [no, setNo] = useState(0);
   return (
     <>
-      {/* <StopWatch /> */}
-      {/* <NumberCounter /> */}
-      {/* <Popup /> */}
-      {/* <ProdList className="container mx-auto" /> */}
-      {/* <NoRecord /> */}
-
-      {/* <Box />
-      <br />
-      <Box className="border" /> */}
-
-      {/* <button onClick={() => fun1()}>1</button>
-      <br />
-      <button onClick={() => fun2(1, 2)}>2</button> */}
-
-      {/* <Sub setAges={setAges} ages={ages} />
-      <div>나이들 : {ages.join(",")} </div> */}
-      {/* <FormEx /> */}
-      {/* <RefEx /> */}
-      {/* <RefModifyEx /> */}
-      <Notice />
+      <input ref={useNameRef} type="text" placeholder="name" />
+      <input ref={inputAgeRef} type="number" placeholder="age" />
+      <button
+        onClick={() => {
+          setNo(no + 1);
+          inputAgeRef.current.focus();
+        }}
+      >
+        증가 : {no}
+      </button>
     </>
   );
 }

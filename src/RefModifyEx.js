@@ -20,13 +20,13 @@ function RefModifyEx() {
   };
 
   const removeNo = (index) => {
-    const newRecordedNos = recordedNos.filter((_, _index) => _index != index);
+    const newRecordedNos = recordedNos.filter((_, _index) => _index !== index);
     setRecordedNos(newRecordedNos);
   };
 
   const modifyNo = (index, newNo) => {
     const newRecordedNos = recordedNos.map((el, _index) =>
-      _index == index ? newNo : el
+      _index === index ? newNo : el
     );
     setRecordedNos(newRecordedNos);
   };

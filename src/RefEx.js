@@ -23,7 +23,7 @@ function RefEx() {
   };
 
   const removeNo = (index) => {
-    const newRecordedNos = recordedNos.filter((_, _index) => _index != index);
+    const newRecordedNos = recordedNos.filter((_, _index) => _index !== index);
     setRecordedNos(newRecordedNos);
   };
 
